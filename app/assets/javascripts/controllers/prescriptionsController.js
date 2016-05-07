@@ -3,6 +3,7 @@ app.prescriptions = {
     new: function PrescriptionsController() {}
   }
 };
+
 app.prescriptions.controller.new.prototype.init = function() {
   $(document).on('click', '#newPrescriptionButton', function(event) {
     $('#form').children().remove();
@@ -35,6 +36,20 @@ app.prescriptions.controller.new.prototype.init = function() {
         $("#newPrescriptionModal").modal("hide");
       });
     });
+  });
+
+  $(document).on('click', '#doc_type_new', function() {
+    $('#new-doctor-fields').show(200);
+  });
+  $(document).on('click', '#doc_type_existing', function() {
+    $('#new-doctor-fields').hide(200);
+
+  });
+    $(document).on('click', '#pharm_type_new', function() {
+    $('#new-pharmacy-fields').show(200);
+  });
+  $(document).on('click', '#pharm_type_existing', function() {
+    $('#new-pharmacy-fields').hide(200);
   });
 
   $(document).on('click', '.editPrescriptionButton', function(event) {

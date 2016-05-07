@@ -1,11 +1,10 @@
-<div class='form-class-'<%= @prescription.id %>>
   <%= form_for @prescription do |f| %>
-    <p>Drug name: <%=fields_for :drug do |drug_form| %>
+    <p>Drug name <%=fields_for :drug do |drug_form| %>
         <%= drug_form.text_field :name, value: @prescription.drug.name %>
       <% end %></p>
 
-    <p>Choose a doctor or enter a new one: <%=fields_for :doctor do |doctor_form| %></p>
-    <p><%= radio_button_tag(:doc_type, "existing", checked: 'checked') %> My Doctors:
+    <%=fields_for :doctor do |doctor_form| %>
+    <p><%= radio_button_tag(:doc_type, "existing", checked: 'checked') %> My doctors
       <%= doctor_form.select :doctor do %>
         <%= content_tag :option, 'select' %>
         <% @user.doctors.uniq.each do |doctor| %>
@@ -13,14 +12,16 @@
         <% end %>
       <% end %>
     </p>
-    <p><%= radio_button_tag(:doc_type, "new") %> New Doctor: </p>
-        <p>First Name <%= doctor_form.text_field :first_name %>
-        Last Name <%= doctor_form.text_field :last_name %> </p>
+    <p><%= radio_button_tag(:doc_type, "new") %> New doctor</p>
+        <div id='new-doctor-fields'>
+        <p>First name <%= doctor_form.text_field :first_name %>
+        Last name <%= doctor_form.text_field :last_name %> </p>
         <p>Location <%= doctor_form.text_field :location %> </p>
+        </div>
       <% end %>
-    <p>Choose a pharmacy or enter a new one: <%=fields_for :pharmacy do |pharmacy_form| %></p>
+    <%=fields_for :pharmacy do |pharmacy_form| %>
       <p><%= radio_button_tag(:pharm_type, "existing", checked: 'checked') %>
-      My Pharmacies:
+      My pharmacies
       <%= pharmacy_form.select :pharmacy do %>
         <%= content_tag :option, 'select' %>
         <% @user.pharmacies.uniq.each do |pharmacy| %>
@@ -28,15 +29,17 @@
         <% end %>
       <% end %>
       </p>
-    <p><%= radio_button_tag(:pharm_type, "new") %> New pharmacy:
-        Name<%= pharmacy_form.text_field :name %>
-        Location<%= pharmacy_form.text_field :location %> </p>
+    <p><%= radio_button_tag(:pharm_type, "new") %> New pharmacy
+        <div id='new-pharmacy-fields'>
+        Name <%= pharmacy_form.text_field :name %>
+        Location <%= pharmacy_form.text_field :location %> </p>
+        </div>
       <% end %>
 
-    <p>Prescription length (in days):
+    <p>Prescription length (in days)
     <%= f.number_field :fill_duration, min: 0%> </p>
 
-    <p>Number of refills:
+    <p>Number of refills
     <%= f.number_field :refills, min: 0 %></p>
 
     <p>Start date
@@ -47,20 +50,19 @@
 
     <p>How many doses will you take at these times? </p>
     <p>
-    Morning: <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
+    Morning <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
       <%= scheduled_dose_form.select :morning, [0, 1, 2, 3, 4, 5, 6, 7], selected: @prescription.doses_by_time_of_day('morning') %>
     <% end %>
-    Afternoon: <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
+    Afternoon <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
       <%= scheduled_dose_form.select :afternoon, [0, 1, 2, 3, 4, 5, 6, 7], selected: @prescription.doses_by_time_of_day('afternoon') %>
     <% end %>
-    Evening: <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
+    Evening <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
       <%= scheduled_dose_form.select :evening, [0, 1, 2, 3, 4, 5, 6, 7], selected: @prescription.doses_by_time_of_day('evening') %>
     <% end %>
-    Bedtime: <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
+    Bedtime <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
       <%= scheduled_dose_form.select :bedtime, [0, 1, 2, 3, 4, 5, 6, 7], selected: @prescription.doses_by_time_of_day('bedtime') %>
-    <% end %><br>
-   </p>
+    <% end %>
+   </p><br>
 
-    <%= f.submit "Edit Prescription!", id: "prescription-#{@prescription.id}", class: "btn btn-primary navbar-btn editPrescriptionButton" %>
+    <p><%= f.submit "Update Prescription", id: "prescription-#{@prescription.id}", class: "btn btn-primary editPrescriptionButton" %></p>
   <% end %>
-  </div>

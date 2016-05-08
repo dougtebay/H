@@ -9,11 +9,11 @@
       <%= doctor_form.select :doctor, doctors, selected: "#{@prescription.doctor.id} - Dr. #{@prescription.doctor.first_name} #{@prescription.doctor.last_name} - #{@prescription.doctor.location}" %>
     </p>
     <p><%= radio_button_tag(:doc_type, "new") %> New doctor</p>
-        
+        <div id='new-doctor-fields'>
         <p>First name <%= doctor_form.text_field :first_name %>
         Last name <%= doctor_form.text_field :last_name %> </p>
         <p>Location <%= doctor_form.text_field :location %> </p>
-        
+        </div>
       <% end %>
     <%=fields_for :pharmacy do |pharmacy_form| %>
       <p><%= radio_button_tag(:pharm_type, "existing", checked: 'checked') %>
@@ -22,10 +22,10 @@
       <%= pharmacy_form.select :pharmacy, pharmacies, selected: "#{@prescription.pharmacy.id} - #{@prescription.pharmacy.name} - #{@prescription.pharmacy.location}" %>
       </p>
     <p><%= radio_button_tag(:pharm_type, "new") %> New pharmacy
-        
+        <div id='new-pharmacy-fields'>
         Name <%= pharmacy_form.text_field :name %>
         Location <%= pharmacy_form.text_field :location %> </p>
-        
+        </div>
       <% end %>
 
     <p>Prescription length (in days)

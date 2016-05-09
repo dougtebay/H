@@ -72,8 +72,7 @@ class PrescriptionsController < ApplicationController
     if params[:doc_type] == "new"
       @prescription.doctor = Doctor.create(doctor_params)
     else
-      doctor_id = params[:doctor][:doctor].split(" ").first.to_i
-      @prescription.doctor = Doctor.find(doctor_id)
+      @prescription.doctor = Doctor.find(params[:doctor][:id])
     end
   end
 
@@ -81,8 +80,7 @@ class PrescriptionsController < ApplicationController
     if params[:pharm_type] == "new"
       @prescription.pharmacy = Pharmacy.create(pharmacy_params)
     else
-      pharmacy_id = params[:pharmacy][:pharmacy].split(" ").first.to_i
-      @prescription.pharmacy = Pharmacy.find(pharmacy_id)
+      @prescription.pharmacy = Pharmacy.find(params[:pharmacy][:id])
     end
   end
 

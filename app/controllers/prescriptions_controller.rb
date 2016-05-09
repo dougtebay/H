@@ -39,9 +39,8 @@ class PrescriptionsController < ApplicationController
   def update
     @prescription = Prescription.find(params[:id])
     @prescription.update(prescription_params)
-    drug = Adapters::DrugClient.find_by_name(drug_params[:name])
-    drug.save
-    @prescription.drug = drug
+    find_or_create_drug
+    @prescription.drug.persist_interactions(current_user)
     find_or_create_doctor
     find_or_create_pharmacy
     @prescription.save

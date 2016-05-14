@@ -32,8 +32,26 @@ app.prescriptions.controller.new.prototype.init = function() {
           });
         }
       });
-      $(document).on('click', '#form-submit', function() {
-        $("#newPrescriptionModal").modal("hide");
+      $('#form-submit').click(function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        formData = $('#new_prescription').serializeArray();
+        $.ajax({
+          url: '/prescriptions',
+          method: 'POST',
+          data: formData
+        }).then(function(data) {
+          $("#newPrescriptionModal").modal("hide");
+          $('#partial').remove();
+          $('body').append(data);
+        }).fail(function(data) {
+          $('#errors').empty();
+          data.responseJSON.errors.forEach(function(error_collection) {
+            error_collection.forEach(function(error) {
+              $('#errors').append('<p>' + error + '</p>');
+            });
+          });
+        });
       });
     });
   });

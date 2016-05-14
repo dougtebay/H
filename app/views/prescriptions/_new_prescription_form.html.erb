@@ -1,3 +1,4 @@
+<div id='errors'></div>
 <%= form_for(@prescription, remote: true) do |f| %>
   <%=fields_for :drug do |drug_form| %>
     <p>Drug name <%= drug_form.text_field :name %><span id='drug-valid-message'></span></p>

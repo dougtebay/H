@@ -169,6 +169,7 @@ a {
 .pillbox-cell-head {
   color: #EEEEEE;
   font-size: 2em;
+  margin-top: 20px;
   padding: 10px;
   background-color: #757575;
 }
@@ -244,15 +245,15 @@ a {
   background-color: white;
 }
 
-#my-rx-container {
-  margin-top: 40px;
-}
-
 .my-rx-header {
   color: #fff;
   margin-left: 0;
   padding-left: 0;
   margin-bottom: 20px;
+}
+
+#active-prescriptions {
+  padding-top: 50px;
 }
 
 .prescriptions-div {

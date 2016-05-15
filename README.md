@@ -4,6 +4,17 @@ Harmony is an app for tracking your medications. It can help you remember what y
 
 Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/).
 
-Harmony was created by Doug Tebay, Leon Harary, Erik Aylward, and Greg Marquet at the Flatiron School in New York City.
+# Collaborators
 
-Technologies used: Ruby on Rails, JavaScript, jQuery, SQLite, PostgreSQL
+Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary](https://github.com/lharary), [Erik Aylward](https://github.com/eaylward8), and [Greg Marquet](https://github.com/gregmarquet) at the Flatiron School in New York City.
+
+# Technologies Used
+
+* Ruby on Rails
+* JavaScript
+* jQuery
+* AJAX
+* SQLite
+* PostgreSQL
+* National Institutes of Health API
+* Bootstrap

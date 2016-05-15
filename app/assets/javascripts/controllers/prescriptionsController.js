@@ -218,17 +218,49 @@ function drugNameValid() {
 }
 
 function doctorValid() {
+  return existingDoctorSelected() ||
+  newDoctorEntered() ||
+  firstDoctorEntered();
+}
+
+function existingDoctorSelected() {
   return $('#doc_type_existing').prop('checked') &&
-  $('#doctor_id :selected').val() !== '' ||
-  $('#doc_type_new').prop('checked') &&
+  $('#doctor_id :selected').val() !== '';
+}
+
+function newDoctorEntered() {
+  return $('#doc_type_new').prop('checked') &&
+  $('#doctor_first_name').val() !== '' &&
+  $('#doctor_last_name').val() !== '';
+}
+
+function firstDoctorEntered() {
+  return !$('#doc_type_existing').prop('checked') &&
+  !$('#doc_type_new').prop('checked') &&
   $('#doctor_first_name').val() !== '' &&
   $('#doctor_last_name').val() !== '';
 }
 
 function pharmacyValid() {
+  return existingPharmacySelected() ||
+  newPharmacyEntered() ||
+  firstPharmacyEntered();
+}
+
+function existingPharmacySelected() {
   return $('#pharm_type_existing').prop('checked') &&
-  $('#pharmacy_id :selected').val() !== '' ||
-  $('#pharm_type_new').prop('checked') &&
+  $('#pharmacy_id :selected').val() !== '';
+}
+
+function newPharmacyEntered() {
+  return $('#pharm_type_new').prop('checked') &&
+  $('#pharmacy_name').val() !== '' &&
+  $('#pharmacy_location').val() !== '';
+}
+
+function firstPharmacyEntered() {
+  return !$('#pharm_type_existing').prop('checked') &&
+  !$('#pharm_type_new').prop('checked') &&
   $('#pharmacy_name').val() !== '' &&
   $('#pharmacy_location').val() !== '';
 }

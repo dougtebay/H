@@ -24,6 +24,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @prescription = Prescription.new(prescription_params)
     @prescription.user = current_user
     find_or_create_drug

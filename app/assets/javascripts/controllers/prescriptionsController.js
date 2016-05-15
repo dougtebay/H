@@ -17,18 +17,16 @@ app.prescriptions.controller.new.prototype.init = function() {
       checkFormValidity();
       $('#form-submit').click(function(event) {
         event.preventDefault();
-        if(formValid()) {
-          var formData = $('#new_prescription').serializeArray();
-          $.ajax({
-            url: '/prescriptions',
-            method: 'POST',
-            data: formData
-          }).success(function(data) {
-            $("#newPrescriptionModal").modal("hide");
-            $('#partial').remove();
-            $('body').append(data);
-          });
-        }
+        $("#newPrescriptionModal").modal("hide");
+        var formData = $('#new_prescription').serializeArray();
+        $.ajax({
+          url: '/prescriptions',
+          method: 'POST',
+          data: formData
+        }).success(function(data) {
+          $('#partial').remove();
+          $('body').append(data);
+        });
       });
     });
   });

@@ -6,7 +6,7 @@ Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/).
 
 # Collaborators
 
-Harmony was created by Doug Tebay, Leon Harary, Erik Aylward, and Greg Marquet at the Flatiron School in New York City.
+Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary](https://github.com/lharary), [Erik Aylward](https://github.com/eaylward8), and [Greg Marquet](https://github.com/gregmarquet) at the Flatiron School in New York City.
 
 # Technologies Used
 

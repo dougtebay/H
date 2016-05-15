@@ -1,7 +1,7 @@
 <div id='errors'></div>
 <%= form_for(@prescription, remote: true) do |f| %>
   <%=fields_for :drug do |drug_form| %>
-    <p>Drug name <%= drug_form.text_field :name %><span id='drug-valid-message'></span></p>
+    <p>Drug name <%= drug_form.text_field :name %><span id='drug-name-validity-message' class='validation-message'></span></p>
   <% end %>
   <%=fields_for :doctor do |doctor_form| %>
     <% if current_user.doctors.length < 1 %>
@@ -16,9 +16,8 @@
 </p>
       <p><%= radio_button_tag(:doc_type, "new") %> New doctor</p>
       <div id='new-doctor-fields'>
-        <p>First name <%= doctor_form.text_field :first_name %>
-        Last name <%= doctor_form.text_field :last_name %></p>
-        <p>Location <%= doctor_form.text_field :location %></p>
+        <p>First name <%= doctor_form.text_field :first_name %><span id='doctor-first-name-error-message' class='validation-message'>First name required</span></p>
+        <p>Last name <%= doctor_form.text_field :last_name %><span id='doctor-last-name-error-message' class='validation-message'>Last name required</span></p>
       </div>
     <% end %>
     <% end %>
@@ -33,16 +32,16 @@
     </p>
       <p><%= radio_button_tag(:pharm_type, "new") %> New pharmacy</p>
         <div id='new-pharmacy-fields'>
-        <p>Name <%= pharmacy_form.text_field :name %>
-        Location <%= pharmacy_form.text_field :location %></p>
+        <p>Name <%= pharmacy_form.text_field :name %><span id='pharmacy-name-error-message' class='validation-message'>Name required</span></p>
+        <p>Location <%= pharmacy_form.text_field :location %><span id='pharmacy-location-error-message' class='validation-message'>Location required</span></p>
         </div>
     <% end %>
 
       <% end %>
-    <p>Prescription length (in days) <%= f.number_field :fill_duration, min: 0 %></p>
-    <p>Number of refills <%= f.number_field :refills, min: 0 %></p>
-    <p>Start date <%= f.date_field :start_date, :value => Date.today %></p>
-    <p>Dose size <%= f.text_field :dose_size, placeholder: "e.g., 40 mg"%></p>
+    <p>Prescription length (in days) <%= f.number_field :fill_duration, min: 1 %><span id='prescription-length-error-message' class='validation-message'>Must be 1 or greater</span></p>
+    <p>Number of refills <%= f.number_field :refills, min: 0 %><span id='refills-error-message' class='validation-message'>Must be 0 or greater</span></p>
+    <p>Start date <%= f.date_field :start_date, :value => Date.today %><span id='start-date-error-message' class='validation-message'>Invalid date</span></p>
+    <p>Dose size <%= f.text_field :dose_size, placeholder: "e.g., 40 mg"%><span id='dose-size-error-message' class='validation-message'>Dose size required</span></p>
     <p>How many doses will you take at these times?</p>
     <p>Morning <%=fields_for :scheduled_doses do |scheduled_dose_form| %>
 
@@ -59,6 +58,6 @@
     <% end %></p><br>
     <!-- <input type='submit' id='form-submit' data-dismiss='modal'>Submit</input> -->
 
-    <p><%= f.submit "Add Prescription", :class => "btn btn-primary", 'id' => "form-submit" %></p>
+    <p><%= f.submit "Add Prescription", :class => "btn btn-primary", 'id' => "form-submit", disabled: true %></p>
   <% end %>
 

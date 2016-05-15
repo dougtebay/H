@@ -345,8 +345,8 @@ a {
 /* new prescription form/modal */
 /********************************/
 
-#drug-valid-message {
+.validation-message {
   padding-left: 20px;
-  font-size: 1.2em;
-  font-weight: bold;
+  color: gray;
+  display: none;
 }

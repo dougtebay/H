@@ -34,10 +34,8 @@ class PrescriptionsController < ApplicationController
     create_scheduled_doses
     @prescription.calculate_end_date
     @user = current_user
-    if errors?
-      render json: { errors: [@prescription.errors.full_messages, doctor_errors] }, :status => 400
-    elsif request.referer == "#{request.base_url}/users/#{current_user.id}"
-      render :partial => "/users/show", :locals => {user: @prescription.user }
+    if request.referer == "#{request.base_url}/users/#{current_user.id}"
+      render :partial => "/users/show", :locals => { user: @prescription.user }
     elsif request.referer == "#{request.base_url}/prescriptions"
       @prescriptions = current_user.prescriptions.all
       render :partial => "/prescriptions/index", :locals => {prescriptions: @prescriptions }
@@ -86,7 +84,7 @@ class PrescriptionsController < ApplicationController
   def find_or_create_pharmacy
     if params[:pharm_type] == "new"
       @prescription.pharmacy = Pharmacy.create(pharmacy_params)
-    else
+    elsif params[:pharmacy][:id].length > 0
       @prescription.pharmacy = Pharmacy.find(params[:pharmacy][:id])
     end
   end
@@ -96,25 +94,6 @@ class PrescriptionsController < ApplicationController
       count.to_i.times do
         ScheduledDose.create(time_of_day: time_of_day, prescription_id: @prescription.id)
       end
-    end
-  end
-
-  def errors?
-    if scheduled_doses = ScheduledDose.where(prescription_id: @prescription.id)
-      scheduled_doses = scheduled_doses.select do |scheduled_dose|
-        scheduled_dose.errors.any?
-      end
-    end
-    scheduled_doses.length > 0 ||
-    @prescription.errors.any? ||
-    @prescription.drug.errors.any? ||
-    doctor_errors ||
-    @prescription.pharmacy.errors.any?
-  end
-
-  def doctor_errors
-    if @prescription.doctor
-      @prescription.doctor.errors.full_messages.length > 0 ? @prescription.doctor.errors.full_messages : false
     end
   end
 

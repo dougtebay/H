@@ -5,7 +5,7 @@ class Prescription < ActiveRecord::Base
   belongs_to :user
   has_many :scheduled_doses
 
-  validates :dose_size, :refills, :fill_duration, :start_date, :doctor_id, presence: true
+  validates :dose_size, :refills, :fill_duration, :start_date, presence: true
   validates :refills, :fill_duration, numericality: true
 
   scope :active, -> { where('end_date >= ? AND start_date <= ?', Date.today, Date.today) }

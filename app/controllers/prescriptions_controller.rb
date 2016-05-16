@@ -48,7 +48,6 @@ class PrescriptionsController < ApplicationController
   end
 
   def update
-    binding.pry
     @prescription = Prescription.find(params[:id])
     @prescription.update(prescription_params)
     find_or_create_doctor

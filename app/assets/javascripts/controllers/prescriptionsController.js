@@ -104,11 +104,8 @@ function checkDrugNameValidity(data) {
 }
 
 function setDrugNameValidityMessage(data) {
-  if(data.validity) {
-    $('#drug-name-validity-message').html('\u2714').show();
-  } else {
-    $('#drug-name-validity-message').html('Invalid name').show();
-  }
+  if(data.validity) { $('#drug-name-validity-message').html('\u2714').show(); }
+  else { $('#drug-name-validity-message').html('Invalid name').show(); }
 }
 
 function removeDrugNameValidityMessage() {
@@ -116,87 +113,96 @@ function removeDrugNameValidityMessage() {
 }
 
 function checkDoctorFirstNameValidity() {
-  $('#doctor_first_name').on('input', function() {
+  function checkDoctorFirstNameValidityCallback() {
     if($(this).val().length === 0) {
       showValidityMessage('#doctor-first-name-error-message');
     } else { hideValidityMessage('#doctor-first-name-error-message'); }
-  });
+  }
   $('#doc_type_existing').focus(function() {
     hideValidityMessage('#doctor-first-name-error-message');
   });
+  onInputOrChange('#doctor_first_name', checkDoctorFirstNameValidityCallback);
 }
 
 function checkDoctorLastNameValidity() {
-  $('#doctor_last_name').on('input', function() {
+  function checkDoctorLastNameValidityCallback() {
     if($(this).val().length === 0) {
       showValidityMessage('#doctor-last-name-error-message');
     } else { hideValidityMessage('#doctor-last-name-error-message'); }
-  });
+  }
   $('#doc_type_existing').focus(function() {
     hideValidityMessage('#doctor-last-name-error-message');
   });
+  onInputOrChange('#doctor_last_name', checkDoctorLastNameValidityCallback);
 }
 
 function checkPharmacyNameValidity() {
-  $('#pharmacy_name').on('input', function() {
+  function checkPharmacyNameValidityCallback() {
     if($(this).val().length === 0) {
       showValidityMessage('#pharmacy-name-error-message');
     } else { hideValidityMessage('#pharmacy-name-error-message'); }
-  });
+  }
   $('#pharm_type_existing').focus(function() {
     hideValidityMessage('#pharmacy-name-error-message');
   });
+  onInputOrChange('#pharmacy_name', checkPharmacyNameValidityCallback);
 }
 
 function checkPharmacyLocationValidity() {
-  $('#pharmacy_location').on('input', function() {
+  function checkPharmacyLocationValidityCallback() {
     if($(this).val().length === 0) {
       showValidityMessage('#pharmacy-location-error-message');
     } else { hideValidityMessage('#pharmacy-location-error-message'); }
-  });
+  }
   $('#pharm_type_existing').focus(function() {
     hideValidityMessage('#pharmacy-location-error-message');
   });
+  onInputOrChange('#pharmacy_location', checkPharmacyLocationValidityCallback);
 }
 
 function checkPrescriptionLengthValidity() {
-  $('#prescription_fill_duration').on('input', function() {
+  function checkPrescriptionLengthValidityCallback() {
     if(prescriptionLengthValid()) {
       hideValidityMessage('#prescription-length-error-message');
     } else { showValidityMessage('#prescription-length-error-message'); }
-  });
+  }
+  onInputOrChange('#prescription_fill_duration', checkPrescriptionLengthValidityCallback);
 }
 
 function checkRefillsValidity() {
-  $('#prescription_refills').on('input', function() {
-    if (refillsValid()) {
-      hideValidityMessage('#refills-error-message');
-    } else { showValidityMessage('#refills-error-message'); }
-  });
+  function checkRefillsValidityCallback() {
+    if (refillsValid()) { hideValidityMessage('#refills-error-message'); }
+    else { showValidityMessage('#refills-error-message'); }
+  }
+  onInputOrChange('#prescription_refills', checkRefillsValidityCallback);
 }
 
 function checkStartDateValidity() {
-  $('#prescription_start_date').on('input', function() {
-    if(startDateValid()) {
-      hideValidityMessage('#start-date-error-message');
-    } else { showValidityMessage('#start-date-error-message'); }
-  });
+  function checkStartDateValidityCallback() {
+    if(startDateValid()) { hideValidityMessage('#start-date-error-message'); }
+    else { showValidityMessage('#start-date-error-message'); }
+  }
+  onInputOrChange('#prescription_start_date', checkStartDateValidityCallback);
 }
 
 function checkDoseSizeValidity() {
-  $('#prescription_dose_size').on('input', function(){
-    if(doseSizeValid()) {
-      hideValidityMessage('#dose-size-error-message');
-    } else { showValidityMessage('#dose-size-error-message'); }
-  });
+  function checkDoseSizeValidityCallback() {
+    if(doseSizeValid()) { hideValidityMessage('#dose-size-error-message'); }
+    else { showValidityMessage('#dose-size-error-message'); }
+  }
+  onInputOrChange('#prescription_dose_size', checkDoseSizeValidityCallback);
 }
 
 function checkFormValidity() {
-  function formValidCallback() {
+  function checkFormValidityCallback() {
     return formValid() ? disableSubmitButton(false) : disableSubmitButton(true);
   }
-  $('#form').on('input', formValidCallback);
-  $('#form').on('change', formValidCallback);
+  onInputOrChange('#form', checkFormValidityCallback);
+}
+
+function onInputOrChange(elementId, callback) {
+  $(elementId).on('input', callback);
+  $(elementId).on('change', callback);
 }
 
 function showValidityMessage(messageId) {

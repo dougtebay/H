@@ -17,7 +17,7 @@ app.prescriptions.controller.new.prototype.init = function() {
       checkFormValidity();
       $('#form-submit').click(function(event) {
         event.preventDefault();
-        $("#newPrescriptionModal").modal("hide");
+        $("#prescriptionModal").modal("hide");
         var formData = $('#new_prescription').serializeArray();
         $.ajax({
           url: '/prescriptions',
@@ -31,39 +31,39 @@ app.prescriptions.controller.new.prototype.init = function() {
     });
   });
 
-  $(document).on('click', '#doc_type_new', function() {
-    $(this).parent().next().show(200);
-  });
-  $(document).on('click', '#doc_type_existing', function() {
-    $(this).parent().next().next().hide(200);
-  });
-    $(document).on('click', '#pharm_type_new', function() {
-    $(this).parent().next().show(200);
-  });
-  $(document).on('click', '#pharm_type_existing', function() {
-    $(this).parent().next().next().hide(200);
+  $(document).on('click', '.editPrescriptionButton', function(event) {
+    $('#form').children().remove();
+    event.preventDefault();
+    prescriptionId = parseInt($(this).attr('id'));
+    $.ajax({
+      url: '/prescriptions/' + prescriptionId + '/edit',
+      method: 'GET'
+    }).success(function(data) {
+      $('#form').append(data);
+      disableSubmitButton(false);
+      checkFormFieldsValidity(data);
+      checkFormValidity();
+      $('#form-submit').click(function(event) {
+        event.preventDefault();
+        $("#prescriptionModal").modal("hide");
+        var formData = $('#edit_prescription_' + prescriptionId).serializeArray();
+        $.ajax({
+          url: '/prescriptions/' + prescriptionId,
+          method: 'PATCH',
+          data: formData
+        }).success(function(data) {
+          $('#partial').remove();
+          $('body').append(data);
+        });
+      });
+    });
   });
 
-  $(document).on('click', '.editPrescriptionButton', function(event) {
-    var prescriptionId = parseInt(this.id.split("-")[1]);
-      var formData = $('#edit_prescription_'+prescriptionId).serializeArray();
-      $.ajax({
-        url: '/prescriptions/'+prescriptionId,
-        method: 'PATCH',
-        data: formData
-      }).success(function(data) {
-        event.preventDefault();
-        var doctor = new app.doctor.model.new(data.prescription.doctor.id, data.prescription.doctor.first_name, data.prescription.doctor.last_name, data.prescription.doctor.location, data.prescription.doctor.specialty);
-        var user = new app.user.model.new(data.prescription.user.first_name, data.prescription.user.last_name, data.prescription.user.id);
-        var pharmacy = new app.pharmacy.model.new(data.prescription.pharmacy.name, data.prescription.pharmacy.location, data.prescription.pharmacy.id);
-        var drug = new app.drug.model.new(data.prescription.drug.name, data.prescription.drug.rxcui, data.prescription.drug.id);
-        var prescription = new app.prescription.model.new(data.prescription.fill_duration, data.prescription.refills, data.prescription.start_date, data.prescription.dose_size, drug, doctor, pharmacy, user, data.prescription.id, data.prescription.end_date);
-        $('.modal').modal('hide');
-        $('.prescription-div-'+prescription.id).empty();
-        $('.prescription-div-'+prescription.id).html(prescription.prescriptionEl());
-      });
-    event.preventDefault();
-  });
+showOptions('#doc_type_new');
+hideOptions('#doc_type_existing');
+showOptions('#pharm_type_new');
+hideOptions('#pharm_type_existing');
+
   $('#exp-soon-table form').click(function(event) {
     event.preventDefault();
     var rxId = $(this).children('.btn').attr('data-rxid');
@@ -116,7 +116,7 @@ function removeDrugNameValidityMessage() {
 }
 
 function checkDoctorFirstNameValidity() {
-  $('#doctor_first_name').focusout(function() {
+  $('#doctor_first_name').on('input', function() {
     if($(this).val().length === 0) {
       showValidityMessage('#doctor-first-name-error-message');
     } else { hideValidityMessage('#doctor-first-name-error-message'); }
@@ -127,7 +127,7 @@ function checkDoctorFirstNameValidity() {
 }
 
 function checkDoctorLastNameValidity() {
-  $('#doctor_last_name').focusout(function() {
+  $('#doctor_last_name').on('input', function() {
     if($(this).val().length === 0) {
       showValidityMessage('#doctor-last-name-error-message');
     } else { hideValidityMessage('#doctor-last-name-error-message'); }
@@ -138,7 +138,7 @@ function checkDoctorLastNameValidity() {
 }
 
 function checkPharmacyNameValidity() {
-  $('#pharmacy_name').focusout(function() {
+  $('#pharmacy_name').on('input', function() {
     if($(this).val().length === 0) {
       showValidityMessage('#pharmacy-name-error-message');
     } else { hideValidityMessage('#pharmacy-name-error-message'); }
@@ -149,7 +149,7 @@ function checkPharmacyNameValidity() {
 }
 
 function checkPharmacyLocationValidity() {
-  $('#pharmacy_location').focusout(function() {
+  $('#pharmacy_location').on('input', function() {
     if($(this).val().length === 0) {
       showValidityMessage('#pharmacy-location-error-message');
     } else { hideValidityMessage('#pharmacy-location-error-message'); }
@@ -160,7 +160,7 @@ function checkPharmacyLocationValidity() {
 }
 
 function checkPrescriptionLengthValidity() {
-  $('#prescription_fill_duration').focusout(function() {
+  $('#prescription_fill_duration').on('input', function() {
     if(prescriptionLengthValid()) {
       hideValidityMessage('#prescription-length-error-message');
     } else { showValidityMessage('#prescription-length-error-message'); }
@@ -168,7 +168,7 @@ function checkPrescriptionLengthValidity() {
 }
 
 function checkRefillsValidity() {
-  $('#prescription_refills').focusout(function() {
+  $('#prescription_refills').on('input', function() {
     if (refillsValid()) {
       hideValidityMessage('#refills-error-message');
     } else { showValidityMessage('#refills-error-message'); }
@@ -176,7 +176,7 @@ function checkRefillsValidity() {
 }
 
 function checkStartDateValidity() {
-  $('#prescription_start_date').focusout(function() {
+  $('#prescription_start_date').on('input', function() {
     if(startDateValid()) {
       hideValidityMessage('#start-date-error-message');
     } else { showValidityMessage('#start-date-error-message'); }
@@ -184,7 +184,7 @@ function checkStartDateValidity() {
 }
 
 function checkDoseSizeValidity() {
-  $('#prescription_dose_size').focusout(function(){
+  $('#prescription_dose_size').on('input', function(){
     if(doseSizeValid()) {
       hideValidityMessage('#dose-size-error-message');
     } else { showValidityMessage('#dose-size-error-message'); }
@@ -192,13 +192,11 @@ function checkDoseSizeValidity() {
 }
 
 function checkFormValidity() {
-  $('#form').change(function() {
-    if(formValid()) {
-      disableSubmitButton(false);
-    } else {
-      disableSubmitButton(true);
-    }
-  });
+  function formValidCallback() {
+    return formValid() ? disableSubmitButton(false) : disableSubmitButton(true);
+  }
+  $('#form').on('input', formValidCallback);
+  $('#form').on('change', formValidCallback);
 }
 
 function showValidityMessage(messageId) {
@@ -214,7 +212,8 @@ function disableSubmitButton(boolean) {
 }
 
 function drugNameValid() {
-  return $('#drug-name-validity-message').html() === '\u2714';
+  return $('#drug-name-validity-message').html() === '\u2714' ||
+  !!$('#drug_name').attr('disabled');
 }
 
 function doctorValid() {
@@ -314,4 +313,16 @@ function formValid() {
   startDateValid() &&
   doseSizeValid() &&
   scheduledDosesValid();
+}
+
+function showOptions(elementId) {
+  $(document).on('click', elementId, function() {
+    $(this).parent().next().show(200);
+  });
+}
+
+function hideOptions(elementId) {
+  $(document).on('click', elementId, function() {
+    $(this).parent().next().next().hide(200);
+  });
 }

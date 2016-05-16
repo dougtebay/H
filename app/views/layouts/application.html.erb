@@ -8,7 +8,7 @@
 </head>
 <body>
   <% if current_user %>
-    <%= render "/prescriptions/new_prescription_modal" %>
+    <%= render "/prescriptions/prescription_modal" %>
     <%= render "/users/edit_user_profile_modal" %>
   <% else %>
     <%= render "layouts/login_modal" %>
@@ -37,7 +37,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Prescriptions<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to 'My Prescriptions', prescriptions_path, method: 'get' %></li>
-              <li><a id='newPrescriptionButton' href="#" data-toggle="modal" data-target="#newPrescriptionModal">New Prescription</a></li>
+              <li><a id='newPrescriptionButton' href="#" data-toggle="modal" data-target="#prescriptionModal">New Prescription</a></li>
             </ul>
           </li>
           <% end %>

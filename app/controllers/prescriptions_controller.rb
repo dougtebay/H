@@ -14,17 +14,21 @@ class PrescriptionsController < ApplicationController
   def new
     @user = current_user
     @prescription = Prescription.new
-    render :partial => "/prescriptions/new_prescription_form",
+    @prescription.drug = Drug.new
+    @prescription.doctor = Doctor.new
+    @prescription.pharmacy = Pharmacy.new
+    render :partial => "/prescriptions/prescription_form",
     :locals => { :prescription => @prescription, :user => @user }
   end
 
   def edit
     @user = current_user
     @prescription = Prescription.find(params[:id])
+    render :partial => "/prescriptions/prescription_form",
+    :locals => { :prescription => @prescription, :user => @user }
   end
 
   def create
-    binding.pry
     @prescription = Prescription.new(prescription_params)
     @prescription.user = current_user
     find_or_create_drug
@@ -39,21 +43,21 @@ class PrescriptionsController < ApplicationController
       render :partial => "/users/show", :locals => { user: @prescription.user }
     elsif request.referer == "#{request.base_url}/prescriptions"
       @prescriptions = current_user.prescriptions.all
-      render :partial => "/prescriptions/index", :locals => {prescriptions: @prescriptions }
+      render :partial => "/prescriptions/index", :locals => { prescriptions: @prescriptions }
     end
   end
 
   def update
+    binding.pry
     @prescription = Prescription.find(params[:id])
     @prescription.update(prescription_params)
-    find_or_create_drug
-    @prescription.drug.persist_interactions(current_user)
     find_or_create_doctor
     find_or_create_pharmacy
     @prescription.save
     @prescription.scheduled_doses.clear
     create_scheduled_doses
-    render(json: {prescription: @prescription}, include: [:drug, :user, :doctor, :pharmacy, :scheduled_doses])
+    @prescriptions = current_user.prescriptions.all
+    render :partial => "/prescriptions/index", :locals => { prescriptions: @prescriptions }
   end
 
   def destroy

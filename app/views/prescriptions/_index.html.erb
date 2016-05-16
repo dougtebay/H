@@ -6,7 +6,7 @@
            <div class="row drug-row active-p new-prescription-active">
            </div>
           <% @prescriptions.each do |rx| %>
-            <% if rx.end_date > Date.today%>
+            <% if rx.end_date >= Date.today%>
               <div class="row drug-row active-p">
                 <div class="prescription-div-<%= rx.id %>">
                   <a data-toggle="collapse" href="#collapsed-details-<%= rx.id %>" aria-expanded="false" aria-control="collapsed-details-<%= rx.id %>">

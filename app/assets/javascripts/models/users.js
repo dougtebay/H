@@ -1,4 +1,3 @@
-
 app.user = {
   model: {
     all: [],
@@ -10,6 +9,6 @@ app.user = {
         app.user.model.all.push(this);
       };
       return user;
-    }())  
+    }())
   }
 };

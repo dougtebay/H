@@ -91,6 +91,19 @@ hideOptions('#pharm_type_existing');
       }
     });
   });
+
+  $(document).on('click', '.deletePrescriptionButton', function(event) {
+    event.preventDefault();
+    prescriptionId = parseInt($(this).prev().attr('id'));
+    $.ajax({
+      url: '/prescriptions/' + prescriptionId,
+      method: 'DELETE',
+      data: { id: prescriptionId }
+    }).success(function(data) {
+      $('#partial').remove();
+      $('body').append(data);
+    });
+  });
 };
 
 function checkDrugNameValidity(data) {

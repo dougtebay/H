@@ -3,12 +3,9 @@
     <div class="prescriptions-div" id="active-prescriptions">
       <div class="col-md-8 col-md-offset-2">
         <h1 class="my-rx-header">Active Prescriptions</h1>
-          <%=  %>
-          <%  %>
            <div class="row drug-row active-p new-prescription-active">
            </div>
           <% @prescriptions.each do |rx| %>
-            <%#= render "edit_prescription_modal", :rx => rx %>
             <% if rx.end_date > Date.today%>
               <div class="row drug-row active-p">
                 <div class="prescription-div-<%= rx.id %>">
@@ -28,6 +25,9 @@
                   </a>
                        <button type="button" id=<%="#{rx.id}"%> class="btn btn-default navbar-btn editPrescriptionButton" data-toggle="modal" data-target="#prescriptionModal">
                   Update
+                       </button>
+                       <button type="button" id=<%="delete_prescription_#{rx.id}"%> class="btn btn-default deletePrescriptionButton">
+                  Delete
                        </button>
                     </div>
                   </div>

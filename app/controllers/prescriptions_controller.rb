@@ -60,10 +60,10 @@ class PrescriptionsController < ApplicationController
   end
 
   def destroy
-    prescription = Prescription.find(params[:id])
-    prescription.end_date = Date.today() - 1
-    prescription.save
-    redirect_to current_user
+    @prescription = Prescription.find(params[:id])
+    @prescription.destroy
+    @prescriptions = current_user.prescriptions.all
+    render :partial => "/prescriptions/index", :locals => { prescriptions: @prescriptions }
   end
 
   private

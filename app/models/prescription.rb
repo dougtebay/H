@@ -3,7 +3,7 @@ class Prescription < ActiveRecord::Base
   belongs_to :doctor
   belongs_to :pharmacy
   belongs_to :user
-  has_many :scheduled_doses
+  has_many :scheduled_doses, dependent: :destroy
 
   validates :dose_size, :refills, :fill_duration, :start_date, presence: true
   validates :refills, :fill_duration, numericality: true

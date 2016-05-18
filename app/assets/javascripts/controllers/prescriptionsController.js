@@ -74,8 +74,8 @@ app.controllers.prescriptionsController.prototype.update = function() {
       method: 'GET'
     }).success(function(data) {
       $('#form').append(data);
-      disableSubmitButton(false);
       var prescriptionsFormValidator = new app.services.prescriptionsFormValidator();
+      prescriptionsFormValidator.disableSubmitButton(false);
       prescriptionsFormValidator.init(data);
       $('#prescription-form-submit').click(function(event) {
         event.preventDefault();

@@ -162,10 +162,6 @@ a {
   padding-left: 50px;
 }
 
-.navbar {
-  /*font-size: 20px;*/
-}
-
 .pillbox-cell-head {
   color: #EEEEEE;
   font-size: 2em;
@@ -216,7 +212,6 @@ a {
   text-decoration: none;
 }
 
-
 /***************************/
 /*    prescription index   */
 /***************************/
@@ -232,7 +227,6 @@ a {
   padding: 20px;
   opacity: 50%;
   width: 300px;
-  
   display: none;
   z-index: 100;
 }
@@ -345,7 +339,7 @@ a {
 /* new prescription form/modal */
 /********************************/
 
-.validation-message {
+.form-validity-message {
   padding-left: 20px;
   color: gray;
   display: none;

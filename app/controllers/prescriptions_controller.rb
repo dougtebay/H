@@ -78,7 +78,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def find_or_create_doctor
-    if params[:doc_type] == "new"
+    if params[:doctor_type] == "new"
       @prescription.doctor = Doctor.create(doctor_params)
     elsif params[:doctor][:id].length > 0
       @prescription.doctor = Doctor.find(params[:doctor][:id])
@@ -86,7 +86,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def find_or_create_pharmacy
-    if params[:pharm_type] == "new"
+    if params[:pharmacy_type] == "new"
       @prescription.pharmacy = Pharmacy.create(pharmacy_params)
     elsif params[:pharmacy][:id].length > 0
       @prescription.pharmacy = Pharmacy.find(params[:pharmacy][:id])

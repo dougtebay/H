@@ -15,7 +15,12 @@
     <%= render "layouts/sign_up_modal" %>
   <% end %>
   <%= render "layouts/navbar" %>
-<%= yield %>
+<%#= yield %>
+<% if current_user %>
+<%= render "users/show" %>
+<% else %>
+<%= render "welcome/index" %>
+<% end %>
 <div id="invalid-drug"></div>
 </body>
 </html>

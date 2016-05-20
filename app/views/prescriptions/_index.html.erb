@@ -1,4 +1,4 @@
-<div class="container-fluid" id="body-partial">
+<div class="container-fluid body-partial">
   <div class="row">
     <div class="prescriptions-div" id="active-prescriptions">
       <div class="col-md-8 col-md-offset-2">
@@ -23,10 +23,10 @@
                       <p><%= "Dr. #{rx.doctor.first_name} #{rx.doctor.last_name}" %></p>
                       <p>Pharmacy: <%= rx.pharmacy.name %> - <%= rx.pharmacy.location %></p>
                   </a>
-                       <button type="button" id=<%="#{rx.id}"%> class="btn btn-default navbar-btn editPrescriptionButton" data-toggle="modal" data-target="#prescriptionModal">
+                       <button type="button" id=<%="#{rx.id}"%> class="btn btn-default navbar-btn edit-prescription-button" data-toggle="modal" data-target="#prescription-modal">
                   Update
                        </button>
-                       <button type="button" id=<%="delete_prescription_#{rx.id}"%> class="btn btn-default deletePrescriptionButton">
+                       <button type="button" id=<%="delete_prescription_#{rx.id}"%> class="btn btn-default delete-prescription-button">
                   Delete
                        </button>
                     </div>

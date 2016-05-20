@@ -84,7 +84,7 @@ app.services.prescriptionsFormValidator.prototype.checkFormValidity = function()
   function checkFormValidityCallback(elementId, self) {
     return self.formValid() ? self.disableSubmitButton(false) : self.disableSubmitButton(true);
   }
-  this.onInputOrChange('#prescriptionForm', checkFormValidityCallback);
+  this.onInputOrChange('#prescription-form', checkFormValidityCallback);
 };
 
 app.services.prescriptionsFormValidator.prototype.formValid = function() {

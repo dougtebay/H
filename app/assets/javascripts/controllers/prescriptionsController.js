@@ -5,7 +5,7 @@ app.controllers.prescriptionsController.prototype.init = function() {
   var prescriptionsFormAnimator = new app.services.prescriptionsFormAnimator();
   prescriptionsFormAnimator.init();
 
-  $('#exp-soon-table form').click(function(event) {
+  $(document).on('click', '#exp-soon-table form', function(event) {
     event.preventDefault();
     var rxId = $(this).children('.btn').attr('data-rxid');
     $.ajax({
@@ -35,36 +35,49 @@ app.controllers.prescriptionsController.prototype.init = function() {
 };
 
 app.controllers.prescriptionsController.prototype.attachListeners = function() {
-  $(document).on('click', '#newPrescriptionButton', $.proxy(function(event) {
+  $(document).on('click', '#my-prescriptions-button', $.proxy(function(event) {
+    this.index(event);
+  }, this));
+  $(document).on('click', '#new-prescription-button', $.proxy(function(event) {
     this.create(event);
   }, this));
-  $(document).on('click', '.editPrescriptionButton', $.proxy(function(event) {
+  $(document).on('click', '.edit-prescription-button', $.proxy(function(event) {
     this.update(event);
   }, this));
-  $(document).on('click', '.deletePrescriptionButton', $.proxy(function(event) {
+  $(document).on('click', '.delete-prescription-button', $.proxy(function(event) {
     this.destroy(event);
   }, this));
 };
 
+app.controllers.prescriptionsController.prototype.index = function() {
+  $.ajax({
+    url: '/prescriptions',
+    method: 'GET'
+  }).success(function(data) {
+    $('.body-partial').remove();
+    $('body').append(data);
+  });
+};
+
 app.controllers.prescriptionsController.prototype.create = function() {
-  $('#prescriptionForm').children().remove();
+  $('#prescription-form').children().remove();
   $.ajax({
     url: '/prescriptions/new',
     method: 'GET'
   }).success(function(data) {
-    $('#prescriptionForm').append(data);
+    $('#prescription-form').append(data);
     var prescriptionsFormValidator = new app.services.prescriptionsFormValidator();
     prescriptionsFormValidator.init(data);
     $('#prescription-form-submit').click(function(event) {
       event.preventDefault();
-      $("#prescriptionModal").modal("hide");
+      $('#prescription-modal').modal('hide');
       var formData = $('#new_prescription').serializeArray();
       $.ajax({
         url: '/prescriptions',
         method: 'POST',
         data: formData
       }).success(function(data) {
-        $('#body-partial').remove();
+        $('.body-partial').remove();
         $('body').append(data);
       });
     });
@@ -72,26 +85,26 @@ app.controllers.prescriptionsController.prototype.create = function() {
 };
 
 app.controllers.prescriptionsController.prototype.update = function(event) {
-  $('#prescriptionForm').children().remove();
+  $('#prescription-form').children().remove();
   prescriptionId = parseInt($(event.target).attr('id'));
   $.ajax({
     url: '/prescriptions/' + prescriptionId + '/edit',
     method: 'GET'
   }).success(function(data) {
-    $('#prescriptionForm').append(data);
+    $('#prescription-form').append(data);
     var prescriptionsFormValidator = new app.services.prescriptionsFormValidator();
     prescriptionsFormValidator.disableSubmitButton(false);
     prescriptionsFormValidator.init(data);
     $('#prescription-form-submit').click(function(event) {
       event.preventDefault();
-      $("#prescriptionModal").modal("hide");
+      $('#prescription-modal').modal('hide');
       var formData = $('#edit_prescription_' + prescriptionId).serializeArray();
       $.ajax({
         url: '/prescriptions/' + prescriptionId,
         method: 'PATCH',
         data: formData
       }).success(function(data) {
-        $('#body-partial').remove();
+        $('.body-partial').remove();
         $('body').append(data);
       });
     });
@@ -105,7 +118,7 @@ app.controllers.prescriptionsController.prototype.destroy = function(event) {
     method: 'DELETE',
     data: { id: prescriptionId }
   }).success(function(data) {
-    $('#body-partial').remove();
+    $('.body-partial').remove();
     $('body').append(data);
   });
 };

@@ -2,9 +2,9 @@ class PrescriptionsController < ApplicationController
   skip_before_action :authorized?
 
   def index
-    @user = current_user
     @prescriptions = current_user.prescriptions.all
     @prescription = Prescription.new
+    render :partial => "/prescriptions/index", :locals => { :prescriptions => @prescriptions }
   end
 
   def show
@@ -40,10 +40,12 @@ class PrescriptionsController < ApplicationController
     @prescription.calculate_end_date
     @user = current_user
     if request.referer == "#{request.base_url}/users/#{current_user.id}"
-      render :partial => "/users/show", :locals => { user: @prescription.user }
+      render :partial => "/users/show", :locals => { user: @user, prescription: @prescription }
     elsif request.referer == "#{request.base_url}/prescriptions"
       @prescriptions = current_user.prescriptions.all
-      render :partial => "/prescriptions/index", :locals => { prescriptions: @prescriptions }
+      render :partial => "/prescriptions/index", :locals => { user: @user, prescription: @prescription }
+    elsif request.referer == "#{request.base_url}/"
+      render :partial => "/users/show", :locals => { user: @user, prescription: @prescription }
     end
   end
 

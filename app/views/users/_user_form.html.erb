@@ -1,4 +1,4 @@
-<div class='text-center'><%= form_for @user do |f| %>
+<div class='text-center'><%= form_for @user, remote: true do |f| %>
   <% if @user.errors.any? %>
     <div class='error messages'>
       <h2>Please correct the errors and resubmit the form.</h2>

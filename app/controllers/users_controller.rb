@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized?, only: [:create]
+  skip_before_action :authorized?, only: [:new, :create]
 
   def show
     @user = current_user
+  end
+
+  def new
+    @user = User.new
+    render :partial => "/users/user_form", :locals => { :user => @user }
   end
 
   def edit
@@ -14,9 +19,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_path(@user), notice: "Thank you for signing up!"
+      render :partial => "/users/sign_in", :locals => { :user => @user }
+      # redirect_to user_path(@user)
     else
-      redirect_to root_path
+      # redirect_to root_path
     end
   end
 

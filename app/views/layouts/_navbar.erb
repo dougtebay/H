@@ -7,15 +7,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% if @user %>
-        <%= link_to image_tag('logo.png', class: 'logo'), user_path(@user) %>
+      <% if current_user %>
+        <%= link_to image_tag('logo.png', class: 'logo'), user_path(current_user) %>
       <% else %>
         <%= link_to image_tag('logo.png', class: 'logo'), root_path %>
       <% end %>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <% if @user %>
+        <% if current_user %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Prescriptions<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -26,11 +26,11 @@
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-              <% if @user %>
+              <% if current_user %>
               <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="   false"><%= "#{@user.first_name} #{@user.last_name}" %><span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="   false"><%= "#{current_user.first_name} #{current_user.last_name}" %><span class="caret"></span></a>
       <ul class="dropdown-menu">
-            <div id='<%= @user.id %>' class='user-id' hidden></div>
+            <div id='<%= current_user.id %>' class='user-id' hidden></div>
              <li><a id='editProfileButton' href="#" data-toggle="modal" data-target="#userModal">Edit Profile</a></li>
              <li><%= link_to 'Log Out', logout_path, method: 'get' %></li>
       </ul>

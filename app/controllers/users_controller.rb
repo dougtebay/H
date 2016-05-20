@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    render :partial => "/layouts/user_form", :locals => { :user => @user }
+    render :partial => "/users/user_form", :locals => { :user => @user }
   end
 
   def create
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.update(user_params)
     @user.save
-    render :nothing => true
+    render :partial => "/layouts/navbar"
   end
 
   private

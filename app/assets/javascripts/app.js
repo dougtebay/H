@@ -7,7 +7,7 @@ $(function() {
   drugsController.init();
   var prescriptionsController = new app.controllers.prescriptionsController();
   prescriptionsController.init();
-  var usersController = new app.users.controller.new();
+  var usersController = new app.controllers.usersController();
   usersController.init();
 
   (function showTimeIndicator() {

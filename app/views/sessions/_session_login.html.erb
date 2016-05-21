@@ -1,5 +1,6 @@
 <%= form_tag sessions_path, id: 'new_session', remote: true do %>
   <div class="text-center" class='field'>
+    <div id='new-session-error-message'><p></p></div>
     <p><%= label_tag :email %><br>
     <%= text_field_tag :email, params[:email] %></p>
   </div>

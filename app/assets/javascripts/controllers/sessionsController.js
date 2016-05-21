@@ -15,17 +15,18 @@ app.controllers.sessionsController.prototype.attachListeners = function() {
 
 app.controllers.sessionsController.prototype.create = function(event) {
   event.preventDefault();
-  $('#login-modal').modal('hide');
   var formData = $('#new_session').serializeArray();
   $.ajax({
     url: '/sessions',
     method: 'POST',
     data: formData
-  }).success(function(data){
-    $('#login-modal').remove();
+    }).then(function(data) {
+    $('#login-modal').modal('hide');
     $('#sign-up-modal').remove();
     $('.body-partial').remove();
     $('body').append(data);
+    }).fail(function(data) {
+    $('#new-session-error-message p').empty().append(data.responseJSON.error);
   });
 };
 
@@ -35,6 +36,7 @@ app.controllers.sessionsController.prototype.destroy = function(event) {
     url: '/sessions/' + userId,
     method: 'DELETE',
   }).success(function(data) {
+    $('#login-modal').remove();
     $('.body-partial').remove();
     $('body').append(data);
     $('#user-dropdown').trigger('click');

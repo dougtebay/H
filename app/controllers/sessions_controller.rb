@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       render :partial => "/users/sign_in", :locals => { :user => @user }
     else
-      render 'new'
+      render json: { error: 'The email or password you entered didn\'t match our records. Please try again.' }, :status => 400
     end
   end
 

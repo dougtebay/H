@@ -5,12 +5,26 @@ app.controllers.usersController.prototype.init = function() {
 };
 
 app.controllers.usersController.prototype.attachListeners = function() {
+  $(document).on('click', '#harmony-logo', $.proxy(function(event) {
+    this.show(event);
+  }, this));
   $(document).on('click', '#new-user-button', $.proxy(function(event) {
     this.create(event);
   }, this));
   $(document).on('click', '#edit-user-button', $.proxy(function(event) {
     this.update(event);
   }, this));
+};
+
+app.controllers.usersController.prototype.show = function() {
+var userId = parseInt($('.user-id').attr('id'));
+  $.ajax({
+    url: '/users/' + userId,
+    method: 'GET'
+  }).success(function(data) {
+    $('.body-partial').remove();
+    $('body').append(data);
+  });
 };
 
 app.controllers.usersController.prototype.create = function() {
@@ -20,11 +34,9 @@ app.controllers.usersController.prototype.create = function() {
     method: 'GET'
   }).success(function(data) {
     $('#user-form').append(data);
-    //var prescriptionsFormValidator = new app.services.prescriptionsFormValidator();
-    //prescriptionsFormValidator.init(data);
     $('#user-form-submit').click(function(event) {
       event.preventDefault();
-      $('#user-modal').modal('hide');
+      $('#sign-up-modal').modal('hide');
       var formData = $('#new_user').serializeArray();
       $.ajax({
         url: '/users',
@@ -48,7 +60,7 @@ app.controllers.usersController.prototype.update = function() {
     $('#user-form').append(data);
     $(document).on('click', '#user-form-submit', function(event) {
       event.preventDefault();
-      $('#user-modal').modal('hide');
+      $('#edit-profile-modal').modal('hide');
       var formData = $('#edit_user_' + userId).serializeArray();
       $.ajax({
         url: '/users/' + userId,

@@ -8,16 +8,16 @@
         <span class="icon-bar"></span>
       </button>
       <% if current_user %>
-        <%= link_to image_tag('logo.png', class: 'logo'), user_path(current_user) %>
+        <%= link_to image_tag('logo.png', id: 'harmony-logo'), user_path(current_user), remote: true %>
       <% else %>
-        <%= link_to image_tag('logo.png', class: 'logo'), root_path %>
+        <%= link_to image_tag('logo.png', id: 'harmony-logo'), root_path %>
       <% end %>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <% if current_user %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Prescriptions<span class="caret"></span></a>
+          <a href="#" id='prescriptions-dropdown' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Prescriptions<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to 'My Prescriptions', prescriptions_path, method: 'get', id: 'my-prescriptions-button', remote: true %></li>
             <li><a id='new-prescription-button' href="#" data-toggle="modal" data-target="#prescription-modal">New Prescription</a></li>
@@ -28,18 +28,18 @@
       <ul class="nav navbar-nav navbar-right">
               <% if current_user %>
               <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="   false"><%= "#{current_user.first_name} #{current_user.last_name}" %><span class="caret"></span></a>
+              <a href="#" id='user-dropdown' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="   false"><%= "#{current_user.first_name} #{current_user.last_name}" %><span class="caret"></span></a>
       <ul class="dropdown-menu">
             <div id='<%= current_user.id %>' class='user-id' hidden></div>
-             <li><a id='edit-user-button' href="#" data-toggle="modal" data-target="#user-modal">Edit Profile</a></li>
-             <li><%= link_to 'Log Out', logout_path, method: 'get' %></li>
+             <li><a id='edit-user-button' href="#" data-toggle="modal" data-target="#edit-profile-modal">Edit Profile</a></li>
+             <li><%= link_to 'Log Out', logout_path, method: 'get', remote: true, id: 'log-out-button' %></li>
       </ul>
               </li>
             <% else %>
-              <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#user-modal" id='new-user-button'>
+              <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#sign-up-modal" id='new-user-button'>
                 Sign Up
               </button>
-              <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#loginModal">
+              <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#login-modal">
               Log In
               </button>
 

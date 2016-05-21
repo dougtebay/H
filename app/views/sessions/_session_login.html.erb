@@ -1,4 +1,4 @@
-<%= form_tag sessions_path do %>
+<%= form_tag sessions_path, id: 'new_session', remote: true do %>
   <div class="text-center" class='field'>
     <p><%= label_tag :email %><br>
     <%= text_field_tag :email, params[:email] %></p>
@@ -8,6 +8,6 @@
     <%= password_field_tag :password %></p>
   </div><br>
   <div class="text-center" class='actions' class="btn btn-default navbar-btn">
-    <%= submit_tag 'Log In', class: "btn btn-primary"  %>
+    <%= submit_tag 'Log In', class: "btn btn-primary", id: 'log-in-button'  %>
   </div>
 <% end %>

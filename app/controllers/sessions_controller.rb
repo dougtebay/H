@@ -2,18 +2,18 @@ class SessionsController < ApplicationController
   skip_before_action :authorized?
 
   def create
-    user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to user_path(user)
+    @user = User.find_by_email(params[:email])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      render :partial => "/users/sign_in", :locals => { :user => @user }
     else
-      flash.now.alert = 'Email or password is invalid'
       render 'new'
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path
+    @user = User.new
+    render :partial => "/users/sign_out", :locals => { :user => @user }
   end
 end

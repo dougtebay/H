@@ -56,6 +56,7 @@ app.controllers.prescriptionsController.prototype.index = function() {
   }).success(function(data) {
     $('.body-partial').remove();
     $('body').append(data);
+    $('#prescriptions-dropdown').trigger('click');
   });
 };
 

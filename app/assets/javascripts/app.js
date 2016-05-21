@@ -3,6 +3,8 @@ app = {
   services: {}
 };
 $(function() {
+  var sessionsController = new app.controllers.sessionsController();
+  sessionsController.init();
   var drugsController = new app.drugs.controller.new();
   drugsController.init();
   var prescriptionsController = new app.controllers.prescriptionsController();

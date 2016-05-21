@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    render :partial => "/users/show", :locals => { :user => @user }
   end
 
   def new

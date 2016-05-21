@@ -36,9 +36,11 @@ app.controllers.sessionsController.prototype.destroy = function(event) {
     url: '/sessions/' + userId,
     method: 'DELETE',
   }).success(function(data) {
+    $('#user-dropdown').trigger('click');
     $('#login-modal').remove();
+    $('#prescription-modal').remove();
+    $('#edit-profile-modal').remove();
     $('.body-partial').remove();
     $('body').append(data);
-    $('#user-dropdown').trigger('click');
   });
 };

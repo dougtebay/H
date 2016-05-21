@@ -1,4 +1,4 @@
-<div class='text-center'><%= form_for @user, remote: true do |f| %>
+<div><%= form_for @user, remote: true do |f| %>
   <% if @user.errors.any? %>
     <div class='error messages'>
       <h2>Please correct the errors and resubmit the form.</h2>
@@ -13,25 +13,25 @@
   <% end %>
   <div class='field'>
     <p><%= f.label :first_name %><br>
-    <%= f.text_field :first_name %></p>
+    <%= f.text_field :first_name %><span id='user-first-name-validity-message' class='form-validity-message'>First name required</span></p>
   </div>
   <div class='field'>
     <p><%= f.label :last_name %><br>
-    <%= f.text_field :last_name %></p>
+    <%= f.text_field :last_name %><span id='user-last-name-validity-message' class='form-validity-message'>Last name required</span></p>
   </div>
   <div class='field'>
     <p><%= f.label :email %><br>
-    <%= f.text_field :email %></p>
+    <%= f.text_field :email %><span id='email-validity-message' class='form-validity-message'></span></p>
   </div>
   <div class='field'>
     <p><%= f.label :password %><br>
-    <%= f.password_field :password %></p>
+    <%= f.password_field :password %><span id='password-validity-message' class='form-validity-message'>Password required</span></p>
   </div>
   <div class='field'>
     <p><%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %></p>
+    <%= f.password_field :password_confirmation %><span id='password-confirmation-validity-message' class='form-validity-message'>Must match password</p>
   </div>
-       <br><div class='actions'><%= f.submit class: "btn btn-primary", id: 'user-form-submit' %></div>
+       <br><div class='actions'><%= f.submit class: "btn btn-primary", id: 'user-form-submit', disabled: true %></div>
      </div>
   
 <% end %></div>

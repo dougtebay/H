@@ -32,7 +32,7 @@ app.services.prescriptionsFormValidator.prototype.checkFormFieldsValidity = func
 app.services.prescriptionsFormValidator.prototype.checkDrugNameValidity = function(data) {
   this.onInputOrChange('#drug_name', this.removeDrugNameValidityMessage);
   $('#drug_name').focusout($.proxy(function() {
-    if ($('#drug_name').val().length > 0) {
+    if($('#drug_name').val().length > 0) {
       var drugName = $('#drug_name').val();
       $.ajax({ url: '/drugs', method: 'POST', data: { drug_name: drugName }, context: this
       }).success(function(data) {
@@ -64,7 +64,7 @@ app.services.prescriptionsFormValidator.prototype.checkDoctorPharmacyFormFieldVa
 
 app.services.prescriptionsFormValidator.prototype.checkMiscFormFieldValidity = function(checkValidityFunction, validityMessageId, formFieldId) {
   function checkFormFieldValidityCallback(elementId, self) {
-    if (checkValidityFunction()) { self.hideValidityMessage(validityMessageId); }
+    if(checkValidityFunction()) { self.hideValidityMessage(validityMessageId); }
     else { self.showValidityMessage(validityMessageId); }
   }
   this.onInputOrChange(formFieldId, checkFormFieldValidityCallback);

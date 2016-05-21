@@ -54,9 +54,9 @@ app.controllers.prescriptionsController.prototype.index = function() {
     url: '/prescriptions',
     method: 'GET'
   }).success(function(data) {
+    $('#prescriptions-dropdown').trigger('click');
     $('.body-partial').remove();
     $('body').append(data);
-    $('#prescriptions-dropdown').trigger('click');
   });
 };
 

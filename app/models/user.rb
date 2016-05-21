@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
 
+  def self.email_unique?(email)
+    self.find_by(email: email) ? false : true
+  end
+
   def regimen(time_of_day)
     self.prescriptions.active.time_of_day(time_of_day).map do |prescription|
       { name: prescription.drug.name,

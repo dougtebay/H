@@ -4,7 +4,7 @@ Harmony is a web app that helps users keep track of their medications and alerts
 
 Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/). To view an account with pre-seeded data, log in with the following:
 
-email: jsmith@gmail.com<br />password: harmony
+email: <span>jsmith@</span>gmail.com<br />password: harmony
 
 # Collaborators
 

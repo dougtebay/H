@@ -57,6 +57,7 @@ class PrescriptionsController < ApplicationController
     @prescription.save
     @prescription.scheduled_doses.clear
     create_scheduled_doses
+    @prescription.calculate_end_date
     @prescriptions = current_user.prescriptions.all
     render :partial => "/prescriptions/index", :locals => { prescriptions: @prescriptions }
   end

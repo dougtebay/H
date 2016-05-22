@@ -27,7 +27,8 @@ var userId = parseInt($('.user-id').attr('id'));
   });
 };
 
-app.controllers.usersController.prototype.create = function() {
+app.controllers.usersController.prototype.create = function(event) {
+  event.stopPropagation();
   $('#user-form').children().remove();
   $.ajax({
     url: '/users/new',
@@ -53,7 +54,8 @@ app.controllers.usersController.prototype.create = function() {
   });
 };
 
-app.controllers.usersController.prototype.update = function() {
+app.controllers.usersController.prototype.update = function(event) {
+  event.stopPropagation();
   $('#sign-up-modal').remove();
   $('#user-form').children().remove();
   var userId = parseInt($('.user-id').attr('id'));

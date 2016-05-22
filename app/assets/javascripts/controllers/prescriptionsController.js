@@ -60,7 +60,8 @@ app.controllers.prescriptionsController.prototype.index = function() {
   });
 };
 
-app.controllers.prescriptionsController.prototype.create = function() {
+app.controllers.prescriptionsController.prototype.create = function(event) {
+  event.stopPropagation();
   $('#prescription-form').children().remove();
   $.ajax({
     url: '/prescriptions/new',
@@ -86,6 +87,7 @@ app.controllers.prescriptionsController.prototype.create = function() {
 };
 
 app.controllers.prescriptionsController.prototype.update = function(event) {
+  event.stopPropagation();
   $('#prescription-form').children().remove();
   prescriptionId = parseInt($(event.target).attr('id'));
   $.ajax({

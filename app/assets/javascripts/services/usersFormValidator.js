@@ -1,8 +1,9 @@
 app.services.usersFormValidator = function UsersFormValidator() {};
+app.services.usersFormValidator.prototype = new app.services.formValidator();
 
 app.services.usersFormValidator.prototype.init = function(data) {
   this.checkFormFieldsValidity(data);
-  this.checkFormValidity();
+  this.checkFormValidity('#user-form');
 };
 
 app.services.usersFormValidator.prototype.checkFormFieldsValidity = function(data) {
@@ -21,40 +22,15 @@ app.services.usersFormValidator.prototype.checkFormFieldsValidity = function(dat
 // Functions to show or hide validity messages for individual form fields
 
 app.services.usersFormValidator.prototype.checkEmailValidity = function(data) {
-  this.onInputOrChange('#user_email', this.removeEmailValidityMessage);
+  this.onInputOrChange('#user_email', this.removeValidityMessage);
   $('#user_email').focusout($.proxy(function() {
     if ($('#user_email').val().length > 0) {
       var email = $('#user_email').val();
       $.ajax({ url: '/emails', method: 'POST', data: { email: email }, context: this
       }).success(function(data) {
-        this.setEmailValidityMessage(data); });
-    } else { this.removeEmailValidityMessage(); }
+        this.setValidityMessage(data, '#email-validity-message', 'Address already in use'); });
+    } else { this.removeValidityMessage('#email-validity-message'); }
   }, this));
-};
-
-app.services.usersFormValidator.prototype.setEmailValidityMessage = function(data) {
-  if(data.validity) { $('#email-validity-message').html('\u2714').show(); }
-  else { $('#email-validity-message').html('Address already in use').show(); }
-};
-
-app.services.usersFormValidator.prototype.removeEmailValidityMessage = function() {
-  $('#email-validity-message').empty();
-};
-
-app.services.usersFormValidator.prototype.checkMiscFormFieldValidity = function(checkValidityFunction, validityMessageId, formFieldId) {
-  function checkFormFieldValidityCallback(elementId, self) {
-    if(checkValidityFunction()) { self.hideValidityMessage(validityMessageId); }
-    else { self.showValidityMessage(validityMessageId); }
-  }
-  this.onInputOrChange(formFieldId, checkFormFieldValidityCallback);
-};
-
-app.services.usersFormValidator.prototype.showValidityMessage = function(messageId) {
-  $(messageId).show();
-};
-
-app.services.usersFormValidator.prototype.hideValidityMessage = function(messageId) {
-  $(messageId).hide();
 };
 
 app.services.usersFormValidator.prototype.checkPasswordComfirmationValidity = function() {
@@ -67,13 +43,6 @@ app.services.usersFormValidator.prototype.checkPasswordComfirmationValidity = fu
 
 // Functions to check the validity of all form fields
 
-app.services.usersFormValidator.prototype.checkFormValidity = function() {
-  function checkFormValidityCallback(elementId, self) {
-    return self.formValid() ? self.disableSubmitButton(false) : self.disableSubmitButton(true);
-  }
-  this.onInputOrChange('#user-form', checkFormValidityCallback);
-};
-
 app.services.usersFormValidator.prototype.formValid = function() {
   return this.firstNameValid() &&
   this.lastNameValid() &&
@@ -82,22 +51,7 @@ app.services.usersFormValidator.prototype.formValid = function() {
   this.passwordConfirmationValid();
 };
 
-app.services.usersFormValidator.prototype.onInputOrChange = function(elementId, callbackName) {
-  var self = this;
-  $(elementId).on('input', function() { callbackName(elementId, self); });
-  $(elementId).on('change', function() { callbackName(elementId, self); });
-};
-
-app.services.usersFormValidator.prototype.disableSubmitButton = function(boolean) {
-  $('#user-form-submit').prop('disabled', boolean);
-};
-
 // Functions to check the validity of individual form fields
-
-app.services.usersFormValidator.prototype.emailValid = function() {
-  return $('#email-validity-message').html() === '\u2714' ||
-  !!$('#user_email').attr('disabled');
-};
 
 app.services.usersFormValidator.prototype.firstNameValid = function() {
   return $('#user_first_name').val() !== '';
@@ -105,6 +59,11 @@ app.services.usersFormValidator.prototype.firstNameValid = function() {
 
 app.services.usersFormValidator.prototype.lastNameValid = function() {
   return $('#user_last_name').val() !== '';
+};
+
+app.services.usersFormValidator.prototype.emailValid = function() {
+  return $('#email-validity-message').html() === '\u2714' ||
+  !!$('#user_email').attr('disabled');
 };
 
 app.services.usersFormValidator.prototype.passwordValid = function() {

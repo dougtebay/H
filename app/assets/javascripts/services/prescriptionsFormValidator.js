@@ -1,8 +1,9 @@
 app.services.prescriptionsFormValidator = function PrescriptionsFormValidator() {};
+app.services.prescriptionsFormValidator.prototype = new app.services.formValidator();
 
 app.services.prescriptionsFormValidator.prototype.init = function(data) {
   this.checkFormFieldsValidity(data);
-  this.checkFormValidity();
+  this.checkFormValidity('#prescription-form');
 };
 
 app.services.prescriptionsFormValidator.prototype.checkFormFieldsValidity = function(data) {
@@ -30,24 +31,15 @@ app.services.prescriptionsFormValidator.prototype.checkFormFieldsValidity = func
 // Functions to show or hide validity messages for individual form fields
 
 app.services.prescriptionsFormValidator.prototype.checkDrugNameValidity = function(data) {
-  this.onInputOrChange('#drug_name', this.removeDrugNameValidityMessage);
+  this.onInputOrChange('#drug_name', this.removeValidityMessage);
   $('#drug_name').focusout($.proxy(function() {
     if($('#drug_name').val().length > 0) {
       var drugName = $('#drug_name').val();
       $.ajax({ url: '/drugs', method: 'POST', data: { drug_name: drugName }, context: this
       }).success(function(data) {
-        this.setDrugNameValidityMessage(data); });
-    } else { this.removeDrugNameValidityMessage(); }
+        this.setValidityMessage(data, '#drug-name-validity-message', 'Invalid name'); });
+    } else { this.removeValidityMessage('#drug-name-validity-message'); }
   }, this));
-};
-
-app.services.prescriptionsFormValidator.prototype.setDrugNameValidityMessage = function(data) {
-  if(data.validity) { $('#drug-name-validity-message').html('\u2714').show(); }
-  else { $('#drug-name-validity-message').html('Invalid name').show(); }
-};
-
-app.services.prescriptionsFormValidator.prototype.removeDrugNameValidityMessage = function() {
-  $('#drug-name-validity-message').empty();
 };
 
 app.services.prescriptionsFormValidator.prototype.checkDoctorPharmacyFormFieldValidity = function(validityMessageId, radioButtonId, formFieldId) {
@@ -62,30 +54,7 @@ app.services.prescriptionsFormValidator.prototype.checkDoctorPharmacyFormFieldVa
   this.onInputOrChange(formFieldId, checkDoctorPharmacyFormFieldValidityCallback);
 };
 
-app.services.prescriptionsFormValidator.prototype.checkMiscFormFieldValidity = function(checkValidityFunction, validityMessageId, formFieldId) {
-  function checkFormFieldValidityCallback(elementId, self) {
-    if(checkValidityFunction()) { self.hideValidityMessage(validityMessageId); }
-    else { self.showValidityMessage(validityMessageId); }
-  }
-  this.onInputOrChange(formFieldId, checkFormFieldValidityCallback);
-};
-
-app.services.prescriptionsFormValidator.prototype.showValidityMessage = function(messageId) {
-  $(messageId).show();
-};
-
-app.services.prescriptionsFormValidator.prototype.hideValidityMessage = function(messageId) {
-  $(messageId).hide();
-};
-
 // Functions to check the validity of all form fields
-
-app.services.prescriptionsFormValidator.prototype.checkFormValidity = function() {
-  function checkFormValidityCallback(elementId, self) {
-    return self.formValid() ? self.disableSubmitButton(false) : self.disableSubmitButton(true);
-  }
-  this.onInputOrChange('#prescription-form', checkFormValidityCallback);
-};
 
 app.services.prescriptionsFormValidator.prototype.formValid = function() {
   return this.drugNameValid() &&
@@ -96,16 +65,6 @@ app.services.prescriptionsFormValidator.prototype.formValid = function() {
   this.startDateValid() &&
   this.doseSizeValid() &&
   this.scheduledDosesValid();
-};
-
-app.services.prescriptionsFormValidator.prototype.onInputOrChange = function(elementId, callbackName) {
-  var self = this;
-  $(elementId).on('input', function() { callbackName(elementId, self); });
-  $(elementId).on('change', function() { callbackName(elementId, self); });
-};
-
-app.services.prescriptionsFormValidator.prototype.disableSubmitButton = function(boolean) {
-  $('#prescription-form-submit').prop('disabled', boolean);
 };
 
 // Functions to check the validity of individual form fields

@@ -2,11 +2,9 @@
 
 Harmony is a web app that helps users keep track of their medications and alerts them to drug interactions. It was built using Ruby on Rails, with a JavaScript front end, and retrieves drug information from the National Institutes of Health's API.
 
-Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/). To view an account pre-seeded with data, log in with the following:
+Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/). To view an account with pre-seeded data, log in with the following:
 
-email: jsmith@gmail.com
-
-password: harmony
+email: jsmith@gmail.com<br />password: harmony
 
 # Collaborators
 

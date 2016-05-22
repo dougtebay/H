@@ -6,6 +6,8 @@ Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/). To view an 
 
 email: <span>jsmith@</span>gmail.com<br />password: harmony
 
+(Please note that since Harmony's data is time-sensitive, prescriptions may or may not appear on the homepage depending on when they've been set to expire  — though I'll do my best to keep them populated.)
+
 # Collaborators
 
 Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary](https://github.com/lharary), [Erik Aylward](https://github.com/eaylward8), and [Greg Marquet](https://github.com/gregmarquet) at the Flatiron School in New York City.

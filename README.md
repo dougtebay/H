@@ -23,8 +23,9 @@ Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary]
 * National Institutes of Health API
 * Bootstrap
 
-# Recent Updates — May 22, 2016
+# Recent Updates
 
+##### May 22, 2016:
 * Used AJAX to convert to a single-page app
 * Added client-side validation to all forms
 * Organized JavaScript code into services and prototype modules

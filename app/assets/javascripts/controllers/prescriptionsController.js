@@ -4,34 +4,6 @@ app.controllers.prescriptionsController.prototype.init = function() {
   this.attachListeners();
   var prescriptionsFormAnimator = new app.services.prescriptionsFormAnimator();
   prescriptionsFormAnimator.init();
-
-  $(document).on('click', '#exp-soon-table form', function(event) {
-    event.preventDefault();
-    var rxId = $(this).children('.btn').attr('data-rxid');
-    $.ajax({
-      url: '/refills/' + rxId,
-      method: 'PATCH',
-      data: {refill: true}
-    }).success(function(data) {
-      if (data.expSoon && data.prescription.refills > 0) {
-        var expDate = data.expDate;
-        var refills = data.prescription.refills;
-        var $expTd = $('tr[data-rxid='+data.prescription.id+'] td:nth-child(2) span');
-        var $refillsTd = $('tr[data-rxid='+data.prescription.id+'] td:nth-child(3) span');
-        $expTd.fadeOut(200, function() {
-          $(this).text(expDate);
-          $(this).fadeIn(200);
-        });
-        $refillsTd.fadeOut(200, function() {
-          $(this).text(refills);
-          $(this).fadeIn(200);
-        });
-      } else {
-        var $tr = $('tr[data-rxid='+data.prescription.id+']');
-        $tr.hide(300, function(){ $(this).remove(); });
-      }
-    });
-  });
 };
 
 app.controllers.prescriptionsController.prototype.attachListeners = function() {
@@ -118,8 +90,7 @@ app.controllers.prescriptionsController.prototype.destroy = function(event) {
   prescriptionId = parseInt($(event.target).prev().attr('id'));
   $.ajax({
     url: '/prescriptions/' + prescriptionId,
-    method: 'DELETE',
-    data: { id: prescriptionId }
+    method: 'DELETE'
   }).success(function(data) {
     $('.body-partial').remove();
     $('body').append(data);

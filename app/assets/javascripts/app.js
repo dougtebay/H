@@ -11,6 +11,8 @@ $(function() {
   prescriptionsController.init();
   var usersController = new app.controllers.usersController();
   usersController.init();
+  var refillsController = new app.controllers.refillsController();
+  refillsController.init();
 
   (function showTimeIndicator() {
     var today = new Date();

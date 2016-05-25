@@ -6,7 +6,7 @@ Try Harmony on Heroku [here](http://harmony-web-app.herokuapp.com/). To view an 
 
 email: <span>jsmith@</span>gmail.com<br />password: harmony
 
-(Please note that since Harmony's data is time-sensitive, prescriptions may or may not appear on the homepage depending on when they've been set to expire  — though I'll do my best to keep them populated.)
+![Harmony](https://dl.dropboxusercontent.com/u/29039767/Harmony.gif)
 
 # Collaborators
 
@@ -23,8 +23,9 @@ Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary]
 * National Institutes of Health API
 * Bootstrap
 
-# Recent Updates — May 22, 2016
+# Recent Updates
 
+##### May 22, 2016:
 * Used AJAX to convert to a single-page app
 * Added client-side validation to all forms
 * Organized JavaScript code into services and prototype modules

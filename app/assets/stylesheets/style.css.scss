@@ -218,6 +218,12 @@ h1 {
   text-align: center;
 }
 
+.form-validity-message {
+  padding-left: 20px;
+  color: gray;
+  display: none;
+}
+
 form {
   padding-left: 20px;
 }

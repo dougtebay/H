@@ -1,23 +1,142 @@
+/** {
+  border: dashed gray 1px;
+}*/
+
 body {
-  cursor: default;
-  background-color: #525252 !important;
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+.table-head {
+  padding-left: 40px;
+  background-color: #546E7A;
+  padding-top: 4px;
+  padding-bottom: 10px;
+}
+
+#regimen-table .table-head {
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+#expiring-soon-table .table-head {
+  margin-right: -40px;
+  margin-left: -40px;
+}
+
+#expiring-soon-table {
+  margin-top: 20px;
+  margin-right: -16px;
+  margin-left: -16px;
+  /*padding-top: 25px;*/
+  padding-bottom: 40px;
+  padding-right: 40px;
+  padding-left: 40px;
+  color: #FFFFFF;
+  background-color: #4CAF50;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.14);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.14);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.14);
+}
+
+#regimen-table {
+  margin-top: 100px;
+  margin-right: -16px;
+  margin-left: -16px;
+  /*padding-top: 25px;*/
+  padding-bottom: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #FFFFFF;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.14);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.14);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.14);
+}
+
+.table-row {
+  font-size: 1.4em;
+}
+
+.table-column-heads {
+  color: #455A64;
+}
+
+.table-cell {
+  margin-right: -7px;
+  margin-left: -7px;
+  height: 52px;
+  padding-left: 20px;
+  background-color: #66BB6A;
+}
+
+.table-cell-container {
+  height: 68px;
+}
+
+.vertically-centered {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: relative;
+}
+
+.refill-button {
+  height: 48px;
+  line-height: 2.4em;
+  margin: auto;
+  text-align: center;
+  color: #546E7A;
+  background-color: #FFFFFF;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 #757575;
+  transition: all .1s linear;
+  font-weight: 500;
+  top: 47%;
+}
+
+.refill-button:active {
+  box-shadow: 0 2px 0 #757575;
+  transform: translateY(-21px);
+}
+
+.refill-button span {
+  display: block;
+}
+
+.refill-button, .refill-button-text {
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.refill-button:hover .refill-button-text {
+  margin-top: -2.5em;
+}
+
+.pills {
+  zoom: 60%;
+}
+
+.refill-button-group {
+  cursor: pointer;
+}
+
+body {
+  background-color: #43A047 !important;
 }
 
 h1 {
   text-shadow: 0px 0px 15px rgba(0, 0, 0, 15);
-}
-
-h3 {
-  text-shadow: 0px 0px 15px rgba(0, 0, 0, 15);
-}
-
-#morning-highlight {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background-color: #F8B195;
 }
 
 #new-doctor-fields {
@@ -28,27 +147,8 @@ h3 {
   display: none;
 }
 
-#afternoon-highlight {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background-color: #FFFFFF;
-}
-
 #welcome-screen {
   padding-top: 130px;
-}
-
-.pillbox-container {
-  padding-top: 90px;
-  padding-bottom: 6px;
-}
-
-.row {
-  padding-left: 40px;
-  padding-right: 40px;
 }
 
 .warning-headline {
@@ -88,16 +188,6 @@ h3 {
 
 .pillbox-cell-icon-container {
   height: 20px;
-}
-
-#time-arrow-row {
-  margin-bottom: 30px;
-}
-
-.time-indicator {
-  text-align: center;
-  color: #fff;
-  font-size: 1.5em;
 }
 
 #background {
@@ -153,42 +243,42 @@ a {
   font-size: 1.3em;
 }
 
-.pillbox-row {
-  margin-top: 1px;
-}
-
 .pillbox-cell {
   height: 320px;
   color: #FFFFFF;
   padding: 10px;
+  margin-top: 6px;
   font-size: 1.4em;
-  border: 2px #525252 solid;
-  padding-left: 50px;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #FFFFFF;
 }
 
 .pillbox-cell-head {
-  color: #EEEEEE;
-  font-size: 2em;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #757575;
+  color: #FFFFFF;
+  padding-top: 4px;
+  padding-bottom: 7px;
+  padding-left: 30px;
+  background-color: #4CAF50;
 }
 
 .pillbox-cell-morning {
-  background-color: #F8B195;
+  background-color: #F06292;
   position: relative;
 }
 
 .pillbox-cell-afternoon {
-  background-color: #F67280;
+  background-color: #E57373;
+  /*background-color: #F67280;*/
 }
 
 .pillbox-cell-evening {
-  background-color: #C06C84;
+  background-color: #7986CB;
+  /*background-color: #C06C84;*/
 }
 
 .pillbox-cell-bedtime {
-  background-color: #6C5B7B;
+  background-color: #9575CD;
+  /*background-color: #6C5B7B;*/
 }
 
 .prescription {
@@ -264,83 +354,4 @@ a {
 
 .active-p a {
   text-decoration: none !important;
-}
-/*********************************/
-/* expiring prescriptions table */
-/********************************/
-
-#refill-msgs {
-  color: white;
-}
-
-#exp-soon-header {
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 5px;
-  color: #F67280;
-  text-shadow: 1.5px 1.5px rgba(60, 60, 60, 0.6);
-}
-
-#exp-soon-table {
-  font-size: 1.4em;
-  text-shadow: 1.5px 1.5px rgba(60, 60, 60, 0.6);
-}
-
-#exp-soon-table td:nth-child(3) span {
-  padding-left: 2em;
-}
-
-#exp-soon-table form {
-  width: 110px;
-}
-
-#exp-soon-table input.active {
-  font-size: 1em;
-  color: #fff;
-  background-color: transparent;
-  border: 1px solid #fff;
-  text-shadow: 1.5px 1.5px rgba(60, 60, 60, 0.6);
-}
-
-#exp-soon-table input.active:hover {
-  background-color: #F67280;
-  -webkit-transition: background-color 150ms linear, border 150ms linear;
-  -moz-transition: background-color 150ms linear, border 150ms linear;
-  -o-transition: background-color 150ms linear, border 150ms linear;
-  -ms-transition: background-color 150ms linear, border 150ms linear;
-  transition: background-color 150ms linear, border 150ms linear;
-  border: 1px solid #F67280;
-  text-shadow: none;
-}
-
-#exp-soon-table button.no-refills {
-  font-size: 1em;
-  color: #fff;
-  background-color: transparent;
-  border: 1px solid #fff;
-  width: 120px;
-}
-
-/* end exp prescription table */
-
-.prescription h2 {
-  color: #406f97;
-}
-
-.prescription small {
-  color: 616161;
-}
-
-.prescription p {
-  color: #616161;
-}
-
-/*********************************/
-/* new prescription form/modal */
-/********************************/
-
-.form-validity-message {
-  padding-left: 20px;
-  color: gray;
-  display: none;
 }

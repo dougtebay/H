@@ -1,24 +1,36 @@
-<div class="col-xs-12" id="exp-soon-div">
-  <h3 id="exp-soon-header">Prescriptions Ending Soon</h3>
-  <table class="table" id="exp-soon-table">
-    <tr>
-      <th>Medication</th>
-      <th>End Date</th>
-      <th>Refills Remaining</th>
-      <th>Got Your Refill?</th>
-    </tr>
-    <% @user.prescriptions.ending_within_week.each do |rx| %>
-      <tr data-rxid='<%= rx.id %>'>
-        <td class='table-data'><%= rx.drug.name %></td>
-        <td class='table-data'><span><%= rx.format_date(rx.end_date) %></span></td>
-        <td class='table-data'><span><%= rx.refills %></span></td>
-        <td>
-          <% if rx.refills > 0 %>
-            <%= button_to 'Update Rx', prescription_path(rx.id), method: 'patch', params: {refill: true}, class: 'btn btn-primary-outline active', 'data-rxid': rx.id.to_s %>
-          <% else %>
-            <button class='btn btn-primary-outline no-refills' disabled=true><span>No Refills</span></button>
-          <% end %>
-        </td>
-      <% end %></tr>
-  </table>
+<div id='expiring-soon-table'>
+  <div class='row table-head'><h2>Expiring Soon</h2></div>
+  <div class='row table-column-heads'>
+    <div class='col-xs-3'><h3>Medication</h3></div>
+    <div class='col-xs-3'><h3>End Date</h3></div>
+    <div class='col-xs-3'><h3>Refills Remaining</h3></div>
+    <div class='col-xs-3'></div>
+  </div>
+  <% if @user.prescriptions.ending_within_week.count > 0 %>
+    <% @user.prescriptions.ending_within_week.sort.each do |prescription| %>
+      <div class='row table-row'>
+        <div class='col-xs-3 table-cell-container'>
+          <div class='table-cell vertically-centered'>
+            <div class='vertically-centered'><%= prescription.drug.name %></div>
+          </div>
+        </div>
+        <div class='col-xs-3 table-cell-container'>
+          <div class='table-cell vertically-centered'>
+            <div class='vertically-centered'><%= prescription.end_date.strftime('%A, %B %d') %></div>
+          </div>
+        </div>
+        <div class='col-xs-3 table-cell-container'>
+          <div class='table-cell vertically-centered'>
+            <div class='vertically-centered'><%= prescription.refills %></div>
+          </div>
+        </div>
+        <div id='<%= prescription.id %>' class='col-xs-3 table-cell-container'>
+          <div class='refill-button refill-button-group vertically-centered'>
+            <span class='refill-button-text refill-button-group'>I Got My Refill</span>
+            <%= image_tag 'pills-and-check-mark.png', class: 'pills refill-button-group' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

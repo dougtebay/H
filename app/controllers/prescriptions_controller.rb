@@ -51,15 +51,20 @@ class PrescriptionsController < ApplicationController
 
   def update
     @prescription = Prescription.find(params[:id])
+    start_date = @prescription.start_date
+    fill_duration = @prescription.fill_duration
     @prescription.update(prescription_params)
     find_or_create_doctor
     find_or_create_pharmacy
     @prescription.save
     @prescription.scheduled_doses.clear
     create_scheduled_doses
-    @prescription.calculate_end_date
+    if start_date != @prescription.start_date || fill_duration != @prescription.fill_duration
+      @prescription.calculate_end_date
+    end
     @prescriptions = current_user.prescriptions.all
-    render :partial => "/prescriptions/index", :locals => { prescriptions: @prescriptions }
+    @user = current_user
+    render :partial => "/users/show", :locals => { user: @user, prescription: @prescription }
   end
 
   def destroy

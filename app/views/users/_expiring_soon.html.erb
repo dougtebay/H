@@ -24,12 +24,20 @@
             <div class='vertically-centered'><%= prescription.refills %></div>
           </div>
         </div>
-        <div id='<%= prescription.id %>' class='col-xs-3 table-cell-container'>
-          <div class='refill-button refill-button-group vertically-centered'>
-            <span class='refill-button-text refill-button-group'>I Got My Refill</span>
-            <%= image_tag 'pills-and-check-mark.png', class: 'pills refill-button-group' %>
+        <% if prescription.refills > 0 %>
+          <div id='<%= prescription.id %>' class='col-xs-3 table-cell-container'>
+            <div class='refill-button refill-button-group vertically-centered'>
+              <span class='refill-button-text refill-button-group'>I Got My Refill</span>
+              <%= image_tag 'pills-and-check-mark.png', class: 'pills refill-button-group' %>
+            </div>
           </div>
-        </div>
+        <% else %>
+          <div id='<%= prescription.id %>' class='col-xs-3 table-cell-container'>
+            <div class='add-refills-button refill-button-group vertically-centered edit-prescription-button' data-toggle="modal" data-target="#prescription-modal">
+              <span class='refill-button-text refill-button-group edit-prescription-button' data-toggle="modal" data-target="#prescription-modal">Add Refills</span>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
   <% end %>

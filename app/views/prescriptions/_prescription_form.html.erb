@@ -43,7 +43,7 @@
   <span id='length-validity-message' class='form-validity-message'>Must be 1 or greater</span></p>
   <p>Number of refills <%= form.number_field :refills %>
   <span id='refills-validity-message' class='form-validity-message'>Must be 0 or greater</span></p>
-  <p>Start date <%= form.date_field :start_date, value: Date.today %>
+  <p>Start date <%= form.date_field :start_date, value: form.object.start_date || Date.today %>
   <span id='start-date-validity-message' class='form-validity-message'>Invalid date</span></p>
   <p>Dose size <%= form.text_field :dose_size, placeholder: "e.g. 40mg"%>
   <span id='dose-size-validity-message' class='form-validity-message'>Dose size required</span></p>

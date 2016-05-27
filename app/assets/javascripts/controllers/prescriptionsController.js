@@ -60,7 +60,7 @@ app.controllers.prescriptionsController.prototype.create = function(event) {
 app.controllers.prescriptionsController.prototype.update = function(event) {
   event.stopPropagation();
   $('#prescription-form').children().remove();
-  prescriptionId = parseInt($(event.target).attr('id'));
+  prescriptionId = parseInt($(event.target).closest('[id]').attr('id'));
   $.ajax({
     url: '/prescriptions/' + prescriptionId + '/edit',
     method: 'GET'
@@ -78,6 +78,7 @@ app.controllers.prescriptionsController.prototype.update = function(event) {
         method: 'PATCH',
         data: formData
       }).success(function(data) {
+        debugger;
         $('.body-partial').remove();
         $('body').append(data);
       });

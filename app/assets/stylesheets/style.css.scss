@@ -148,6 +148,28 @@ h2 {
   cursor: pointer;
 }
 
+.add-refills-button {
+  height: 48px;
+  width: 80%;
+  line-height: 2.4em;
+  margin: auto;
+  text-align: center;
+  color: #546E7A;
+  background-color: #FFFFFF;
+  /*overflow: hidden;*/
+  /*border-radius: 0px;*/
+  box-shadow: 0 5px 0 #78909C;
+  transition: all .1s linear;
+  font-weight: 500;
+  top: 47%;
+}
+
+.add-refills-button:active {
+  box-shadow: 0 2px 0 #78909C;
+  transform: translateY(-21px);
+}
+
+
 #harmony-logo {
   padding-top: 22px;
   padding-right: 30px;
@@ -164,7 +186,7 @@ h1 {
 #welcome-screen h3 {
   color: #D6D6D6;
   font-family: "Farray-Regular";
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 #new-doctor-fields {
@@ -177,10 +199,21 @@ h1 {
 
 #welcome-screen {
   font-family: "Farray-Light";
-  padding-top: 11%;
+  padding-top: 25%;
   color: #4B4B4B;
   font-size: 70px;
 }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+#welcome-screen {
+  font-family: "Farray-Light";
+  padding-top: 11%;
+  color: #4B4B4B;
+  font-size: 70px;
+  zoom: 80%;
+}
+}
+
 
 .warning-headline {
   color: #616161;
@@ -325,7 +358,6 @@ a {
 
 #home-jumbotron {
   background-color: transparent;
-  margin-top: 140px;
   color: #e7e7e7
 }
 

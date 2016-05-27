@@ -23,6 +23,7 @@ app.controllers.sessionsController.prototype.create = function(event) {
     }).then(function(data) {
     $('#login-modal').modal('hide');
     $('#sign-up-modal').remove();
+    $('#navbar-partial').remove();
     $('.body-partial').remove();
     $('body').append(data);
     }).fail(function(data) {
@@ -31,15 +32,15 @@ app.controllers.sessionsController.prototype.create = function(event) {
 };
 
 app.controllers.sessionsController.prototype.destroy = function(event) {
-  var userId = parseInt($('.user-id').attr('id'));
+  var userId = parseInt($('.edit-user-button').attr('id'));
   $.ajax({
     url: '/sessions/' + userId,
     method: 'DELETE',
   }).success(function(data) {
-    $('#user-dropdown').trigger('click');
     $('#login-modal').remove();
     $('#prescription-modal').remove();
     $('#edit-profile-modal').remove();
+    $('#navbar-partial').remove();
     $('.body-partial').remove();
     $('body').append(data);
   });

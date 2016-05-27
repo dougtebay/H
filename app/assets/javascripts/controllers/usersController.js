@@ -11,13 +11,13 @@ app.controllers.usersController.prototype.attachListeners = function() {
   $(document).on('click', '#new-user-button', $.proxy(function(event) {
     this.create(event);
   }, this));
-  $(document).on('click', '#edit-user-button', $.proxy(function(event) {
+  $(document).on('click', '.edit-user-button', $.proxy(function(event) {
     this.update(event);
   }, this));
 };
 
 app.controllers.usersController.prototype.show = function() {
-var userId = parseInt($('.user-id').attr('id'));
+var userId = parseInt($('.edit-user-button').attr('id'));
   $.ajax({
     url: '/users/' + userId,
     method: 'GET'
@@ -58,7 +58,7 @@ app.controllers.usersController.prototype.update = function(event) {
   event.stopPropagation();
   $('#sign-up-modal').remove();
   $('#user-form').children().remove();
-  var userId = parseInt($('.user-id').attr('id'));
+  var userId = parseInt($('.edit-user-button').attr('id'));
   $.ajax({
     url: '/users/' + userId + '/edit',
     method: 'GET'

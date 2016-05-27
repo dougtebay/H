@@ -4,17 +4,17 @@
 
 @font-face {
   font-family: "Farray";
-  src: url("Aileron-Bold.otf") format("opentype");
+  src: font-url("Aileron-Bold.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Farray-Light";
-  src: url("Aileron-Light.otf") format("opentype");
+  src: font-url("Aileron-Light.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Farray-Regular";
-  src: url("Aileron-Regular.otf") format("opentype");
+  src: font-url("Aileron-Regular.otf") format("opentype");
 }
 
 body {

@@ -33,6 +33,7 @@ Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary]
 
 # Next Steps
 
+* Organize logic from views into view objects
 * Add integration tests
 * Incorporate React
 * Use API to offer spelling suggestions for drug names

@@ -199,21 +199,21 @@ h1 {
 
 #welcome-screen {
   font-family: "Farray-Light";
-  padding-top: 25%;
+  padding-top: 18vh;
   color: #4B4B4B;
   font-size: 70px;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+/*@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
 #welcome-screen {
   font-family: "Farray-Light";
-  padding-top: 11%;
+  padding-top: 21%;
   color: #4B4B4B;
   font-size: 70px;
-  zoom: 80%;
+  zoom: 100%;
 }
 }
-
+*/
 
 .warning-headline {
   color: #616161;

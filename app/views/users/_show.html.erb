@@ -1,6 +1,4 @@
 <div class='container body-partial'>
-    <%= render partial: 'users/pillbox_cells' %>
-    <%# if @user.prescriptions.ending_within_week.count > 0 %>
-      <%= render partial: 'users/expiring_soon' %>
-    <%# end %>
+  <%= render partial: 'users/pillbox_cells' %>
+  <%= render partial: 'users/expiring_soon' %>
 </div>

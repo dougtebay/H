@@ -35,6 +35,9 @@ gem 'httparty'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'autoprefixer-rails'
+
+gem 'react-rails', '~> 1.7', '>= 1.7.1'
+
 group :production do
   gem 'pg'
 end

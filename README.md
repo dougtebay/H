@@ -25,7 +25,8 @@ Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary]
 
 # Recent Updates
 
-##### May 22, 2016:
+##### June 3, 2016:
+* Installed React and began adding components
 * Used AJAX to convert to a single-page app
 * Added client-side validation to all forms
 * Organized JavaScript code into services and prototype modules
@@ -33,9 +34,7 @@ Harmony was created by [Doug Tebay](https://github.com/dougtebay), [Leon Harary]
 
 # Next Steps
 
-* Organize logic from views into view objects
 * Add integration tests
-* Incorporate React
 * Use API to offer spelling suggestions for drug names
 * Add login through Google or Facebook
 * Use Action Mailer to verify email addresses

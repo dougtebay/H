@@ -17,6 +17,11 @@ class Prescription < ActiveRecord::Base
     self.scheduled_doses.select {|dose| dose.time_of_day == time_of_day}.count
   end
 
+  def formatted_doses(time_of_day)
+    doses = self.doses_by_time_of_day(time_of_day)
+    doses > 1 ? "x#{doses}" : ''
+  end
+
   def refill
     if refills > 0
       self.refills -= 1

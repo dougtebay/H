@@ -26,6 +26,7 @@ app.controllers.sessionsController.prototype.create = function(event) {
     $('#navbar-partial').remove();
     $('.body-partial').remove();
     $('body').append(data);
+    ReactRailsUJS.mountComponents()
     }).fail(function(data) {
     $('#new-session-error-message p').empty().append(data.responseJSON.error);
   });

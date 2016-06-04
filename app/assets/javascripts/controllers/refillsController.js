@@ -19,5 +19,6 @@ app.controllers.refillsController.prototype.update = function(event) {
   }).success(function(data) {
     $('.body-partial').remove();
     $('body').append(data);
+    ReactRailsUJS.mountComponents()
   });
 };

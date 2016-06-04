@@ -24,6 +24,7 @@ var userId = parseInt($('.edit-user-button').attr('id'));
   }).success(function(data) {
     $('.body-partial').remove();
     $('body').append(data);
+    ReactRailsUJS.mountComponents()
   });
 };
 

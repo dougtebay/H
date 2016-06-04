@@ -52,6 +52,7 @@ app.controllers.prescriptionsController.prototype.create = function(event) {
       }).success(function(data) {
         $('.body-partial').remove();
         $('body').append(data);
+        ReactRailsUJS.mountComponents()
       });
     });
   });
@@ -78,9 +79,9 @@ app.controllers.prescriptionsController.prototype.update = function(event) {
         method: 'PATCH',
         data: formData
       }).success(function(data) {
-        debugger;
         $('.body-partial').remove();
         $('body').append(data);
+        ReactRailsUJS.mountComponents()
       });
     });
   });
